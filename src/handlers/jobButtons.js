@@ -39,14 +39,10 @@ async function handleJobButton(interaction) {
     });
 
     await interaction.update({
-      content: interaction.message.content,
+      content: `<@&${job.eligibleRoleId}>\n🎉 <@${interaction.user.id}> claimed **${job.title}**!`,
       embeds: [buildJobEmbed(updated)],
       components: buildJobButtons(updated),
     });
-
-    await interaction.channel.send(
-      `🎉 <@${interaction.user.id}> claimed **${job.title}**!`
-    );
     return;
   }
 
@@ -72,26 +68,10 @@ async function handleJobButton(interaction) {
       },
     });
 
-    // Collapse the old message so it doesn't look like the live post anymore,
-    // then repost the embed at the bottom of the channel so it's easy to spot.
     await interaction.update({
-      content: 'Reposted below so it stays easy to spot ⬇️',
-      embeds: [],
-      components: [],
-    });
-
-    await interaction.channel.send(
-      `⚠️ <@${interaction.user.id}> can no longer do **${job.title}** — it's open again! <@&${job.eligibleRoleId}>`
-    );
-
-    const repost = await interaction.channel.send({
+      content: `<@&${job.eligibleRoleId}>\n⚠️ <@${interaction.user.id}> can no longer do **${job.title}** — it's open again!`,
       embeds: [buildJobEmbed(updated)],
       components: buildJobButtons(updated),
-    });
-
-    await prisma.job.update({
-      where: { id: jobId },
-      data: { messageId: repost.id },
     });
     return;
   }
