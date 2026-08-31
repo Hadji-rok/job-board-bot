@@ -76,7 +76,7 @@ async function createTicketChannel(interaction, ticketType, answers = []) {
   });
 
   const welcomeEmbed = new EmbedBuilder()
-    .setColor(0x2b2d31)
+    .setColor(0x0878d1)
     .setTitle(ticketType.label)
     .setDescription(`${ticketType.description}\n\nThanks for reaching out, <@${interaction.user.id}>! Staff (<@&${config.staffRoleId}>) will be with you shortly.`);
 
