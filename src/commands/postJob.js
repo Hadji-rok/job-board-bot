@@ -70,6 +70,7 @@ module.exports = {
       content: `${eligibleRole}`,
       embeds: [embed],
       components: rows,
+      allowedMentions: { roles: [eligibleRole.id] },
     });
 
     await prisma.job.update({
