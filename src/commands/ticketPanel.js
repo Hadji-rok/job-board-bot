@@ -35,7 +35,7 @@ module.exports = {
     if (customerTypes.length > 0) {
       const menu = new StringSelectMenuBuilder()
         .setCustomId('ticket_open_CUSTOMER')
-        .setPlaceholder('Customer Ticket — hire a service')
+        .setPlaceholder('Interested')
         .addOptions(
           customerTypes.map((t) => ({
             label: t.label,
@@ -49,7 +49,7 @@ module.exports = {
     if (supportTypes.length > 0) {
       const menu = new StringSelectMenuBuilder()
         .setCustomId('ticket_open_SUPPORT')
-        .setPlaceholder('Support Ticket — get help')
+        .setPlaceholder('Customer Support')
         .addOptions(
           supportTypes.map((t) => ({
             label: t.label,
