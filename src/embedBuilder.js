@@ -34,11 +34,13 @@ function buildJobEmbed(job) {
   }
 
   if (job.status === 'CLOSED') {
-    embed.setFooter({ text: 'This job has been closed.' });
+    embed.setFooter({ text: `Job #${job.id} · This job has been closed.` });
   } else if (job.status === 'EXPIRED') {
-    embed.setFooter({ text: 'This job expired.' });
+    embed.setFooter({ text: `Job #${job.id} · This job expired.` });
   } else if (job.expiresAt) {
-    embed.setFooter({ text: `Expires` }).setTimestamp(job.expiresAt);
+    embed.setFooter({ text: `Job #${job.id} · Expires` }).setTimestamp(job.expiresAt);
+  } else {
+    embed.setFooter({ text: `Job #${job.id}` });
   }
 
   return embed;
