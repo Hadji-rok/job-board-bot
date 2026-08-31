@@ -42,6 +42,7 @@ async function handleJobButton(interaction) {
       content: `<@&${job.eligibleRoleId}>\n🎉 <@${interaction.user.id}> claimed **${job.title}**!`,
       embeds: [buildJobEmbed(updated)],
       components: buildJobButtons(updated),
+      allowedMentions: { roles: [job.eligibleRoleId], users: [interaction.user.id] },
     });
     return;
   }
@@ -72,6 +73,7 @@ async function handleJobButton(interaction) {
       content: `<@&${job.eligibleRoleId}>\n⚠️ <@${interaction.user.id}> can no longer do **${job.title}** — it's open again!`,
       embeds: [buildJobEmbed(updated)],
       components: buildJobButtons(updated),
+      allowedMentions: { roles: [job.eligibleRoleId], users: [interaction.user.id] },
     });
     return;
   }
