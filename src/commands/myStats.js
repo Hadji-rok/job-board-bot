@@ -29,7 +29,7 @@ module.exports = {
     );
 
     const embed = new EmbedBuilder()
-      .setColor(0x2b2d31)
+      .setColor(0x0878d1)
       .setTitle(`📊 Stats for ${interaction.user.username}`)
       .addFields(
         { name: 'Completed Shifts', value: `${completedShifts.length}`, inline: true },
