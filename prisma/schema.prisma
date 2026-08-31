@@ -1,0 +1,96 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum JobStatus {
+  OPEN
+  CLAIMED
+  CLOSED
+  EXPIRED
+}
+
+model Job {
+  id              Int       @id @default(autoincrement())
+  title           String
+  kingdom         String
+  payment         String
+  whenText        String    @default("NOW")
+  linkedTicket    String?
+
+  postedById      String
+  postedByTag     String
+
+  eligibleRoleId  String
+  eligibleRoleName String
+
+  claimedById     String?
+  claimedByTag    String?
+
+  status          JobStatus @default(OPEN)
+
+  guildId         String
+  channelId       String
+  messageId       String?
+
+  expiresAt       DateTime?
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+}
+
+enum TicketGroup {
+  CUSTOMER
+  SUPPORT
+}
+
+enum TicketStatus {
+  OPEN
+  CLOSED
+}
+
+// Per-guild bot configuration (currently just the staff role for tickets).
+model GuildConfig {
+  guildId     String  @id
+  staffRoleId String?
+}
+
+// A configurable ticket type/option, e.g. "War Piloting" under the Customer group.
+model TicketType {
+  id          Int         @id @default(autoincrement())
+  guildId     String
+  key         String
+  label       String
+  description String
+  group       TicketGroup
+  categoryId  String?
+  createdAt   DateTime    @default(now())
+
+  @@unique([guildId, key])
+}
+
+// A created ticket channel.
+model Ticket {
+  id            Int          @id @default(autoincrement())
+  guildId       String
+  channelId     String
+  openedById    String
+  ticketTypeKey String
+  ticketLabel   String
+  status        TicketStatus @default(OPEN)
+  createdAt     DateTime     @default(now())
+  closedAt      DateTime?
+}
+
+// A pilot's clocked-in work shift, logged via /shift start and /shift end.
+model Shift {
+  id        Int       @id @default(autoincrement())
+  guildId   String
+  userId    String
+  startedAt DateTime  @default(now())
+  endedAt   DateTime?
+  createdAt DateTime  @default(now())
+}
