@@ -1,0 +1,22 @@
+{
+  "name": "job-board-bot",
+  "version": "1.0.0",
+  "description": "Discord bot for posting and claiming paid jobs via embed + buttons",
+  "main": "src/index.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node src/index.js",
+    "deploy-commands": "node src/deploy-commands.js",
+    "prisma:generate": "prisma generate",
+    "prisma:migrate": "prisma migrate dev"
+  },
+  "dependencies": {
+    "@prisma/client": "^5.19.1",
+    "discord.js": "^14.15.3",
+    "dotenv": "^16.4.5",
+    "ms": "^2.1.3"
+  },
+  "devDependencies": {
+    "prisma": "^5.19.1"
+  }
+}
