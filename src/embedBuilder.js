@@ -12,7 +12,7 @@ const {
  */
 function buildJobEmbed(job) {
   const color =
-    job.status === 'OPEN' ? 0x2b2d31 :
+    job.status === 'OPEN' ? 0x0878d1 :
     job.status === 'CLAIMED' ? 0x57f287 :
     job.status === 'CLOSED' ? 0x99aab5 :
     0xed4245; // EXPIRED
