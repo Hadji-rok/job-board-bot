@@ -26,7 +26,7 @@ module.exports = {
     }
 
     const embed = new EmbedBuilder()
-      .setColor(0x2b2d31)
+      .setColor(0x0878d1)
       .setTitle('Open a Ticket')
       .setDescription('Pick the option below that matches what you need. A private channel will be created just for you.');
 
@@ -35,7 +35,7 @@ module.exports = {
     if (customerTypes.length > 0) {
       const menu = new StringSelectMenuBuilder()
         .setCustomId('ticket_open_CUSTOMER')
-        .setPlaceholder('Interested')
+        .setPlaceholder('Customer Ticket — hire a service')
         .addOptions(
           customerTypes.map((t) => ({
             label: t.label,
@@ -49,7 +49,7 @@ module.exports = {
     if (supportTypes.length > 0) {
       const menu = new StringSelectMenuBuilder()
         .setCustomId('ticket_open_SUPPORT')
-        .setPlaceholder('Customer Support')
+        .setPlaceholder('Support Ticket — get help')
         .addOptions(
           supportTypes.map((t) => ({
             label: t.label,
