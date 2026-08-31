@@ -39,6 +39,7 @@ async function handleJobButton(interaction) {
     });
 
     await interaction.update({
+      content: interaction.message.content,
       embeds: [buildJobEmbed(updated)],
       components: buildJobButtons(updated),
     });
