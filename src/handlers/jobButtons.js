@@ -40,7 +40,7 @@ async function handleJobButton(interaction) {
 
     await interaction.update({
       content: `<@&${job.eligibleRoleId}>\n🎉 <@${interaction.user.id}> claimed **${job.title}**!`,
-      embeds: [buildJobEmbed(updated)],
+      embeds: [buildJobEmbed(updated, interaction.guild.iconURL({ size: 256 }))],
       components: buildJobButtons(updated),
       allowedMentions: { roles: [job.eligibleRoleId], users: [interaction.user.id] },
     });
@@ -71,7 +71,7 @@ async function handleJobButton(interaction) {
 
     await interaction.update({
       content: `<@&${job.eligibleRoleId}>\n⚠️ <@${interaction.user.id}> can no longer do **${job.title}** — it's open again!`,
-      embeds: [buildJobEmbed(updated)],
+      embeds: [buildJobEmbed(updated, interaction.guild.iconURL({ size: 256 }))],
       components: buildJobButtons(updated),
       allowedMentions: { roles: [job.eligibleRoleId], users: [interaction.user.id] },
     });

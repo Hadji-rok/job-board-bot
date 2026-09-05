@@ -32,6 +32,16 @@ async function createTicketChannel(interaction, ticketType, answers = []) {
     });
   }
 
+  const openTicketCount = await prisma.ticket.count({
+    where: { guildId: interaction.guildId, openedById: interaction.user.id, status: 'OPEN' },
+  });
+  const MAX_OPEN_TICKETS_PER_USER = 3;
+  if (openTicketCount >= MAX_OPEN_TICKETS_PER_USER) {
+    return interaction.editReply({
+      content: `You already have ${openTicketCount} open tickets. Please close one before opening another.`,
+    });
+  }
+
   const guild = interaction.guild;
   const everyoneId = guild.roles.everyone.id;
 

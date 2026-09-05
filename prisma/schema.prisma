@@ -54,8 +54,10 @@ enum TicketStatus {
 
 // Per-guild bot configuration (currently just the staff role for tickets).
 model GuildConfig {
-  guildId     String  @id
-  staffRoleId String?
+  guildId            String  @id
+  staffRoleId        String?
+  ticketLogChannelId String?
+  jobPostChannelId   String?
 }
 
 // A configurable ticket type/option, e.g. "War Piloting" under the Customer group.

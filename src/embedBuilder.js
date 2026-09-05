@@ -10,7 +10,7 @@ const {
  * title, Kingdom/Payment/When, Posted by, Eligible Roles,
  * Linked Ticket, Claimed by (once claimed).
  */
-function buildJobEmbed(job) {
+function buildJobEmbed(job, thumbnailUrl) {
   const color =
     job.status === 'OPEN' ? 0x0878d1 :
     job.status === 'CLAIMED' ? 0x57f287 :
@@ -28,6 +28,10 @@ function buildJobEmbed(job) {
       { name: 'Eligible Roles', value: `<@&${job.eligibleRoleId}>` },
       { name: 'Linked Ticket', value: job.linkedTicket ? job.linkedTicket : '# *unknown*' },
     );
+
+  if (thumbnailUrl) {
+    embed.setThumbnail(thumbnailUrl);
+  }
 
   if (job.claimedById) {
     embed.addFields({ name: 'Claimed by', value: `<@${job.claimedById}>` });

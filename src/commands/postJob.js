@@ -63,7 +63,7 @@ module.exports = {
       },
     });
 
-    const embed = buildJobEmbed(job);
+    const embed = buildJobEmbed(job, interaction.guild.iconURL({ size: 256 }));
     const rows = buildJobButtons(job);
 
     const message = await interaction.editReply({

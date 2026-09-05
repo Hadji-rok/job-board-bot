@@ -6,12 +6,14 @@ const forceRelease = require('./commands/forceRelease');
 const ticketConfig = require('./commands/ticketConfig');
 const ticketType = require('./commands/ticketType');
 const ticketPanel = require('./commands/ticketPanel');
+const jobConfig = require('./commands/jobConfig');
 const shift = require('./commands/shift');
 const myStats = require('./commands/myStats');
 const { handleJobButton } = require('./handlers/jobButtons');
 const { handleTicketSelect } = require('./handlers/ticketSelect');
 const { handleTicketButton } = require('./handlers/ticketClose');
 const { handleTicketFormSubmit } = require('./handlers/ticketFormSubmit');
+const { handleJobPanelButton, handleJobModalSubmit } = require('./handlers/jobPanel');
 const { startExpiryChecker } = require('./expiryChecker');
 
 const client = new Client({
@@ -25,6 +27,7 @@ client.commands.set(forceRelease.data.name, forceRelease);
 client.commands.set(ticketConfig.data.name, ticketConfig);
 client.commands.set(ticketType.data.name, ticketType);
 client.commands.set(ticketPanel.data.name, ticketPanel);
+client.commands.set(jobConfig.data.name, jobConfig);
 client.commands.set(shift.data.name, shift);
 client.commands.set(myStats.data.name, myStats);
 
@@ -48,6 +51,8 @@ client.on('interactionCreate', async (interaction) => {
         await handleJobButton(interaction);
       } else if (interaction.customId === 'ticket_close' || interaction.customId === 'ticket_delete') {
         await handleTicketButton(interaction);
+      } else if (interaction.customId === 'post_job_open_modal') {
+        await handleJobPanelButton(interaction);
       }
       return;
     }
@@ -62,6 +67,8 @@ client.on('interactionCreate', async (interaction) => {
     if (interaction.isModalSubmit()) {
       if (interaction.customId.startsWith('ticket_form_')) {
         await handleTicketFormSubmit(interaction);
+      } else if (interaction.customId === 'post_job_modal') {
+        await handleJobModalSubmit(interaction);
       }
       return;
     }
