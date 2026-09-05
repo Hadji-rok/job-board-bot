@@ -8,6 +8,7 @@ const ticketType = require('./commands/ticketType');
 const ticketPanel = require('./commands/ticketPanel');
 const shift = require('./commands/shift');
 const myStats = require('./commands/myStats');
+const jobConfig = require('./commands/jobConfig');
 
 const commands = [
   postJob.data.toJSON(),
@@ -18,6 +19,7 @@ const commands = [
   ticketPanel.data.toJSON(),
   shift.data.toJSON(),
   myStats.data.toJSON(),
+  jobConfig.data.toJSON(),
 ];
 
 const rest = new REST().setToken(process.env.DISCORD_TOKEN);
